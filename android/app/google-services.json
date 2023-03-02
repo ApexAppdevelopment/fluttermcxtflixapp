@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "417238843117",
+    "firebase_url": "https://macxtoken22-default-rtdb.firebaseio.com",
+    "project_id": "macxtoken22",
+    "storage_bucket": "macxtoken22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417238843117:android:432973e8af3a65f8ae56e4",
+        "android_client_info": {
+          "package_name": "com.McxtMovieFlix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417238843117-hjq0s1fmerkptv7ukdd64eqact4ctbqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.McxtMovieFlix",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "100551681575438004610",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhEOSIBBjD8DHdGggGdNe2b0LmaslMK2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100551681575438004610",
+              "client_type": 3
+            },
+            {
+              "client_id": "417238843117-8hnrb3bnm62dp32jl54vps2gvsb247gu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mcxtrealtateappuikit"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417238843117:android:b90a760b5cb0de33ae56e4",
+        "android_client_info": {
+          "package_name": "com.mcxtrealtateappuikit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417238843117-cbi4e1hgd80p3353il6k0a3aa4eijcpf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mcxtrealtateappuikit",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "100551681575438004610",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhEOSIBBjD8DHdGggGdNe2b0LmaslMK2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100551681575438004610",
+              "client_type": 3
+            },
+            {
+              "client_id": "417238843117-8hnrb3bnm62dp32jl54vps2gvsb247gu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mcxtrealtateappuikit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
