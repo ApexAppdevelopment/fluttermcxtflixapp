@@ -27,3 +27,4 @@ export '/movie_details_local/movie_details_local_widget.dart'
     show MovieDetailsLocalWidget;
 export '/allmovies/allmovies_widget.dart' show AllmoviesWidget;
 export '/tmdb_link/tmdb_link_widget.dart' show TmdbLinkWidget;
+export '/mov_details/mov_details_widget.dart' show MovDetailsWidget;

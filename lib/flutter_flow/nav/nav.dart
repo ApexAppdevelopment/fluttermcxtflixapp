@@ -103,8 +103,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'MovieDetails',
               path: 'movieDetails',
+              asyncParams: {
+                'mainmoviedetails':
+                    getDoc(['mainmovie'], MainmovieRecord.serializer),
+              },
               builder: (context, params) => MovieDetailsWidget(
-                movieId: params.getParam('movieId', ParamType.int),
+                mainmoviedetails:
+                    params.getParam('mainmoviedetails', ParamType.Document),
               ),
             ),
             FFRoute(
@@ -170,9 +175,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'PlayMovie',
               path: 'playMovie',
+              asyncParams: {
+                'playmainmovie':
+                    getDoc(['mainmovie'], MainmovieRecord.serializer),
+              },
               builder: (context, params) => PlayMovieWidget(
-                details: params.getParam<TmdbmovieRow>(
-                    'details', ParamType.SupabaseRow),
+                playmainmovie:
+                    params.getParam('playmainmovie', ParamType.Document),
               ),
             ),
             FFRoute(
@@ -247,6 +256,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => TmdbLinkWidget(
                 link: params.getParam<AllMoviesRow>(
                     'link', ParamType.SupabaseRow),
+              ),
+            ),
+            FFRoute(
+              name: 'MovDetails',
+              path: 'movDetails',
+              asyncParams: {
+                'movdetails': getDoc(['mainmovie'], MainmovieRecord.serializer),
+              },
+              builder: (context, params) => MovDetailsWidget(
+                movdetails: params.getParam('movdetails', ParamType.Document),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),

@@ -186,69 +186,53 @@ class _SearchWidgetState extends State<SearchWidget> {
                           itemCount: searMovies.length,
                           itemBuilder: (context, searMoviesIndex) {
                             final searMoviesItem = searMovies[searMoviesIndex];
-                            return InkWell(
-                              onTap: () async {
-                                context.pushNamed(
-                                  'MovieDetails',
-                                  queryParams: {
-                                    'movieId': serializeParam(
-                                      getJsonField(
-                                        searMoviesItem,
-                                        r'''$.id''',
+                            return Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image.network(
+                                      valueOrDefault<String>(
+                                        'https://www.themoviedb.org/t/p/w1280/${getJsonField(
+                                          searMoviesItem,
+                                          r'''$.poster_path''',
+                                        ).toString()}',
+                                        'https://www.themoviedb.org/t/p/w1280/ox4goZd956BxqJH6iLwhWPL9ct4.jpg',
                                       ),
-                                      ParamType.int,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
                                     ),
-                                  }.withoutNulls,
-                                );
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.network(
-                                        valueOrDefault<String>(
-                                          'https://www.themoviedb.org/t/p/w1280/${getJsonField(
-                                            searMoviesItem,
-                                            r'''$.poster_path''',
-                                          ).toString()}',
-                                          'https://www.themoviedb.org/t/p/w1280/ox4goZd956BxqJH6iLwhWPL9ct4.jpg',
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 4.0, 0.0, 0.0),
+                                  child: Text(
+                                    getJsonField(
+                                      searMoviesItem,
+                                      r'''$.title''',
+                                    ).toString(),
+                                    maxLines: 1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
                                         ),
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 4.0, 0.0, 0.0),
-                                    child: Text(
-                                      getJsonField(
-                                        searMoviesItem,
-                                        r'''$.title''',
-                                      ).toString(),
-                                      maxLines: 1,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             );
                           },
                         );

@@ -1,4 +1,4 @@
-import '/backend/supabase/supabase.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,10 +16,10 @@ export 'play_movie_model.dart';
 class PlayMovieWidget extends StatefulWidget {
   const PlayMovieWidget({
     Key? key,
-    this.details,
+    this.playmainmovie,
   }) : super(key: key);
 
-  final TmdbmovieRow? details;
+  final MainmovieRecord? playmainmovie;
 
   @override
   _PlayMovieWidgetState createState() => _PlayMovieWidgetState();
@@ -89,10 +89,8 @@ class _PlayMovieWidgetState extends State<PlayMovieWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoSizeText(
-                  valueOrDefault<String>(
-                    widget.details?.title,
-                    'title',
-                  ).maybeHandleOverflow(maxChars: 20),
+                  widget.playmainmovie!.title!
+                      .maybeHandleOverflow(maxChars: 20),
                   style: FlutterFlowTheme.of(context).title2.override(
                         fontFamily: FlutterFlowTheme.of(context).title2Family,
                         color: FlutterFlowTheme.of(context).secondaryText,
@@ -116,8 +114,7 @@ class _PlayMovieWidgetState extends State<PlayMovieWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               FlutterFlowVideoPlayer(
-                path:
-                    'https://firebasestorage.googleapis.com/v0/b/mcxtflix/o/Plane.2023.1080p.WEBRip.x264-RARBG.mp4?alt=media&token=d7a6b84c-1472-411d-8752-12233943c713',
+                path: widget.playmainmovie!.movie!,
                 videoType: VideoType.network,
                 autoPlay: true,
                 looping: true,

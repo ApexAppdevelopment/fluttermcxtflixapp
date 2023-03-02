@@ -42,11 +42,10 @@ class _LoginBottomSheetWidgetState extends State<LoginBottomSheetWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
+    return Material(
+      color: Colors.transparent,
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
@@ -54,83 +53,96 @@ class _LoginBottomSheetWidgetState extends State<LoginBottomSheetWidget> {
           topRight: Radius.circular(16.0),
         ),
       ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 0.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              width: 80.0,
-              height: 4.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryText,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 16.0),
-              child: Text(
-                'Start with',
-                style: FlutterFlowTheme.of(context).subtitle2,
-              ),
-            ),
-            InkWell(
-              onTap: () async {
-                context.pushNamed('SignIn');
-              },
-              child: Container(
-                width: double.infinity,
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        constraints: BoxConstraints(
+          maxHeight: 300.0,
+        ),
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(0.0),
+            bottomRight: Radius.circular(0.0),
+            topLeft: Radius.circular(16.0),
+            topRight: Radius.circular(16.0),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 0.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 80.0,
+                height: 4.0,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBtnText,
+                  color: FlutterFlowTheme.of(context).primaryText,
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
-                  child: ListTile(
-                    leading: Icon(
-                      FFIcons.knameUser,
-                      color: Colors.white,
-                      size: 32.0,
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 16.0),
+                child: Text(
+                  'Start with',
+                  style: FlutterFlowTheme.of(context).subtitle2,
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  context.pushNamed('SignIn');
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBtnText,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
+                    child: ListTile(
+                      leading: Icon(
+                        FFIcons.knameUser,
+                        color: Colors.white,
+                        size: 32.0,
+                      ),
+                      title: Text(
+                        'MCXT HOLDER',
+                        style: FlutterFlowTheme.of(context).subtitle2.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).subtitle2Family,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).subtitle2Family),
+                            ),
+                      ),
+                      subtitle: Text(
+                        'You can sign up/sign in with your email address',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: Color(0xA8E9EAEA),
+                              fontSize: 12.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: 20.0,
+                      ),
+                      tileColor: Color(0xFFF5F5F5),
+                      dense: false,
                     ),
-                    title: Text(
-                      'MCXT HOLDER',
-                      style: FlutterFlowTheme.of(context).subtitle2.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).subtitle2Family,
-                            color: Colors.white,
-                            fontWeight: FontWeight.normal,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).subtitle2Family),
-                          ),
-                    ),
-                    subtitle: Text(
-                      'You can sign up/sign in with your email address',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyText1Family,
-                            color: Color(0xA8E9EAEA),
-                            fontSize: 12.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyText1Family),
-                          ),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                      size: 20.0,
-                    ),
-                    tileColor: Color(0xFFF5F5F5),
-                    dense: false,
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 8.0),
-              child: InkWell(
-                onTap: () async {
-                  context.pushNamed('HomeFree');
-                },
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 20.0),
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -181,8 +193,8 @@ class _LoginBottomSheetWidgetState extends State<LoginBottomSheetWidget> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

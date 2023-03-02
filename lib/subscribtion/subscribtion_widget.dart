@@ -74,12 +74,13 @@ class _SubscribtionWidgetState extends State<SubscribtionWidget> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Text(
-                      'Subscribe to Premium Plan',
+                      'Subscribe to MCXT Premium Plan',
                       style: FlutterFlowTheme.of(context).title2,
                     ),
                   ),
@@ -88,7 +89,7 @@ class _SubscribtionWidgetState extends State<SubscribtionWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 32.0),
                     child: Text(
                       'Select one of the following Premium plans for unlimited access to all videos, then press the continue button',
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   ),
