@@ -143,52 +143,65 @@ class _LoginBottomSheetWidgetState extends State<LoginBottomSheetWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 20.0),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      width: 1.0,
+                child: InkWell(
+                  onTap: () async {
+                    context.pushNamed('HomeFree');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        width: 1.0,
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
-                    child: ListTile(
-                      leading: Icon(
-                        FFIcons.knameUser,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 32.0,
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
+                      child: ListTile(
+                        leading: Icon(
+                          FFIcons.knameUser,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 32.0,
+                        ),
+                        title: Text(
+                          'Guest',
+                          style: FlutterFlowTheme.of(context)
+                              .subtitle2
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .subtitle2Family,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontWeight: FontWeight.normal,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .subtitle2Family),
+                              ),
+                        ),
+                        subtitle: Text(
+                          'Skip for now',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyText1Family,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 12.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyText1Family),
+                              ),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 20.0,
+                        ),
+                        tileColor: Color(0xFFF5F5F5),
+                        dense: false,
                       ),
-                      title: Text(
-                        'Guest',
-                        style: FlutterFlowTheme.of(context).subtitle2.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).subtitle2Family,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              fontWeight: FontWeight.normal,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).subtitle2Family),
-                            ),
-                      ),
-                      subtitle: Text(
-                        'Skip for now',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText1Family,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 12.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
-                            ),
-                      ),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 20.0,
-                      ),
-                      tileColor: Color(0xFFF5F5F5),
-                      dense: false,
                     ),
                   ),
                 ),

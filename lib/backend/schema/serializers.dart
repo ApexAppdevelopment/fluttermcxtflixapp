@@ -5,6 +5,7 @@ import 'bookmark_record.dart';
 import 'mainmovie_record.dart';
 import 'user_record.dart';
 import 'watch_history_record.dart';
+import 'goodmovies_record.dart';
 
 import 'index.dart';
 
@@ -19,6 +20,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   MainmovieRecord,
   UserRecord,
   WatchHistoryRecord,
+  GoodmoviesRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

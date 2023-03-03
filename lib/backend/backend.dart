@@ -9,6 +9,7 @@ import 'schema/bookmark_record.dart';
 import 'schema/mainmovie_record.dart';
 import 'schema/user_record.dart';
 import 'schema/watch_history_record.dart';
+import 'schema/goodmovies_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -20,6 +21,7 @@ export 'schema/bookmark_record.dart';
 export 'schema/mainmovie_record.dart';
 export 'schema/user_record.dart';
 export 'schema/watch_history_record.dart';
+export 'schema/goodmovies_record.dart';
 
 /// Functions to query BookmarkRecords (as a Stream and as a Future).
 Future<int> queryBookmarkRecordCount({
@@ -223,6 +225,58 @@ Future<FFFirestorePage<WatchHistoryRecord>> queryWatchHistoryRecordPage({
     queryCollectionPage(
       WatchHistoryRecord.collection,
       WatchHistoryRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query GoodmoviesRecords (as a Stream and as a Future).
+Future<int> queryGoodmoviesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      GoodmoviesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<GoodmoviesRecord>> queryGoodmoviesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      GoodmoviesRecord.collection,
+      GoodmoviesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<GoodmoviesRecord>> queryGoodmoviesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      GoodmoviesRecord.collection,
+      GoodmoviesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<GoodmoviesRecord>> queryGoodmoviesRecordPage({
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      GoodmoviesRecord.collection,
+      GoodmoviesRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

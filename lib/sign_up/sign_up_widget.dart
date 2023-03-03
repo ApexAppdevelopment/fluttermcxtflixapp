@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +13,12 @@ import 'sign_up_model.dart';
 export 'sign_up_model.dart';
 
 class SignUpWidget extends StatefulWidget {
-  const SignUpWidget({Key? key}) : super(key: key);
+  const SignUpWidget({
+    Key? key,
+    this.refCode,
+  }) : super(key: key);
+
+  final DocumentReference? refCode;
 
   @override
   _SignUpWidgetState createState() => _SignUpWidgetState();
@@ -440,6 +446,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   .randomInteger(100000, 999999)
                                   .toString(),
                               displayName: _model.signUpNameController.text,
+                              sponsorid: FFAppState().refCode.toString(),
                             );
                             await UserRecord.collection
                                 .doc(user.uid)

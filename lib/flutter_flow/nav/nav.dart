@@ -91,7 +91,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'SignUp',
               path: 'signUp',
-              builder: (context, params) => SignUpWidget(),
+              builder: (context, params) => SignUpWidget(
+                refCode: params.getParam(
+                    'refCode', ParamType.DocumentReference, false, ['user']),
+              ),
             ),
             FFRoute(
               name: 'TvShowsDetails',
@@ -215,16 +218,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ChangePassswordWidget(),
             ),
             FFRoute(
+              name: 'AllTrending',
+              path: 'allTrending',
+              builder: (context, params) => AllTrendingWidget(),
+            ),
+            FFRoute(
               name: 'Home',
               path: 'home',
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'Home')
                   : HomeWidget(),
-            ),
-            FFRoute(
-              name: 'AllTrending',
-              path: 'allTrending',
-              builder: (context, params) => AllTrendingWidget(),
             ),
             FFRoute(
               name: 'TrailerPlayer',
@@ -259,6 +262,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'RefferralLink',
+              path: 'refferralLink',
+              builder: (context, params) => RefferralLinkWidget(),
+            ),
+            FFRoute(
               name: 'MovDetails',
               path: 'movDetails',
               asyncParams: {
@@ -266,6 +274,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               },
               builder: (context, params) => MovDetailsWidget(
                 movdetails: params.getParam('movdetails', ParamType.Document),
+              ),
+            ),
+            FFRoute(
+              name: 'AffiliateLogin',
+              path: 'affiliateLogin',
+              builder: (context, params) => AffiliateLoginWidget(),
+            ),
+            FFRoute(
+              name: 'PlayMoviegoodmovie',
+              path: 'playMoviegoodmovie',
+              asyncParams: {
+                'goodmovieplay':
+                    getDoc(['goodmovies'], GoodmoviesRecord.serializer),
+              },
+              builder: (context, params) => PlayMoviegoodmovieWidget(
+                goodmovieplay:
+                    params.getParam('goodmovieplay', ParamType.Document),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),

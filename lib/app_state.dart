@@ -15,6 +15,7 @@ class FFAppState extends ChangeNotifier {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
+    _refCode = prefs.getInt('ff_refCode') ?? _refCode;
   }
 
   void update(VoidCallback callback) {
@@ -28,6 +29,13 @@ class FFAppState extends ChangeNotifier {
   String get movietitle => _movietitle;
   set movietitle(String _value) {
     _movietitle = _value;
+  }
+
+  int _refCode = 0;
+  int get refCode => _refCode;
+  set refCode(int _value) {
+    _refCode = _value;
+    prefs.setInt('ff_refCode', _value);
   }
 }
 

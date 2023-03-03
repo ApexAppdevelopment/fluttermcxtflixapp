@@ -35,6 +35,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   @BuiltValueField(wireName: 'phone_number')
   String? get phoneNumber;
 
+  String? get refferralLink;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -49,7 +51,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..city = ''
     ..mcxtwalletaddress = ''
     ..walletbalance = 0
-    ..phoneNumber = '';
+    ..phoneNumber = ''
+    ..refferralLink = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('user');
@@ -83,6 +86,7 @@ Map<String, dynamic> createUserRecordData({
   String? mcxtwalletaddress,
   int? walletbalance,
   String? phoneNumber,
+  String? refferralLink,
 }) {
   final firestoreData = serializers.toFirestore(
     UserRecord.serializer,
@@ -98,7 +102,8 @@ Map<String, dynamic> createUserRecordData({
         ..city = city
         ..mcxtwalletaddress = mcxtwalletaddress
         ..walletbalance = walletbalance
-        ..phoneNumber = phoneNumber,
+        ..phoneNumber = phoneNumber
+        ..refferralLink = refferralLink,
     ),
   );
 

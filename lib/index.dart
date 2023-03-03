@@ -20,11 +20,15 @@ export '/play_free_movie/play_free_movie_widget.dart' show PlayFreeMovieWidget;
 export '/home_free/home_free_widget.dart' show HomeFreeWidget;
 export '/change_passsword/change_passsword_widget.dart'
     show ChangePassswordWidget;
-export '/home/home_widget.dart' show HomeWidget;
 export '/all_trending/all_trending_widget.dart' show AllTrendingWidget;
+export '/home/home_widget.dart' show HomeWidget;
 export '/trailer_player/trailer_player_widget.dart' show TrailerPlayerWidget;
 export '/movie_details_local/movie_details_local_widget.dart'
     show MovieDetailsLocalWidget;
 export '/allmovies/allmovies_widget.dart' show AllmoviesWidget;
 export '/tmdb_link/tmdb_link_widget.dart' show TmdbLinkWidget;
+export '/refferral_link/refferral_link_widget.dart' show RefferralLinkWidget;
 export '/mov_details/mov_details_widget.dart' show MovDetailsWidget;
+export '/affiliate_login/affiliate_login_widget.dart' show AffiliateLoginWidget;
+export '/play_moviegoodmovie/play_moviegoodmovie_widget.dart'
+    show PlayMoviegoodmovieWidget;

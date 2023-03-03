@@ -111,8 +111,10 @@ class TvShowsInfoCall {
 
 class PopularMoviesCall {
   static Future<ApiCallResponse> call({
-    int? page = 1,
+    List<int>? totalPageList,
   }) {
+    final totalPage = _serializeList(totalPageList);
+
     return ApiManager.instance.makeApiCall(
       callName: 'PopularMovies',
       apiUrl:
@@ -120,7 +122,7 @@ class PopularMoviesCall {
       callType: ApiCallType.GET,
       headers: {},
       params: {
-        'page': page,
+        'total_pages': 543,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -128,6 +130,12 @@ class PopularMoviesCall {
       cache: false,
     );
   }
+
+  static dynamic totalpages(dynamic response) => getJsonField(
+        response,
+        r'''$.total_pages''',
+        true,
+      );
 }
 
 class MovieDetailsCall {

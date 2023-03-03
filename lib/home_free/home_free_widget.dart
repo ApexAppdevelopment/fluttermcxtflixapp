@@ -130,7 +130,8 @@ class _HomeFreeWidgetState extends State<HomeFreeWidget>
                           children: [
                             StreamBuilder<List<MainmovieRecord>>(
                               stream: queryMainmovieRecord(
-                                singleRecord: true,
+                                queryBuilder: (mainmovieRecord) =>
+                                    mainmovieRecord.where('id', isEqualTo: 1),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -150,26 +151,28 @@ class _HomeFreeWidgetState extends State<HomeFreeWidget>
                                 List<MainmovieRecord>
                                     pageViewMainmovieRecordList =
                                     snapshot.data!;
-                                // Return an empty Container when the item does not exist.
-                                if (snapshot.data!.isEmpty) {
-                                  return Container();
-                                }
-                                final pageViewMainmovieRecord =
-                                    pageViewMainmovieRecordList.isNotEmpty
-                                        ? pageViewMainmovieRecordList.first
-                                        : null;
                                 return Container(
                                   width: double.infinity,
                                   height: 400.0,
                                   child: Stack(
                                     children: [
-                                      PageView(
-                                        controller:
-                                            _model.pageViewController ??=
-                                                PageController(initialPage: 0),
+                                      PageView.builder(
+                                        controller: _model
+                                                .pageViewController ??=
+                                            PageController(
+                                                initialPage: min(
+                                                    1,
+                                                    pageViewMainmovieRecordList
+                                                            .length -
+                                                        1)),
                                         scrollDirection: Axis.horizontal,
-                                        children: [
-                                          Container(
+                                        itemCount:
+                                            pageViewMainmovieRecordList.length,
+                                        itemBuilder: (context, pageViewIndex) {
+                                          final pageViewMainmovieRecord =
+                                              pageViewMainmovieRecordList[
+                                                  pageViewIndex];
+                                          return Container(
                                             width: 100.0,
                                             height: 98.7,
                                             decoration: BoxDecoration(
@@ -180,7 +183,7 @@ class _HomeFreeWidgetState extends State<HomeFreeWidget>
                                                 fit: BoxFit.cover,
                                                 image:
                                                     CachedNetworkImageProvider(
-                                                  pageViewMainmovieRecord!
+                                                  pageViewMainmovieRecord
                                                       .imagebanner!,
                                                 ),
                                               ),
@@ -267,7 +270,7 @@ class _HomeFreeWidgetState extends State<HomeFreeWidget>
                                                                   0.0,
                                                                   0.0),
                                                       child: AutoSizeText(
-                                                        pageViewMainmovieRecord!
+                                                        pageViewMainmovieRecord
                                                             .title!
                                                             .maybeHandleOverflow(
                                                                 maxChars: 25),
@@ -390,8 +393,8 @@ class _HomeFreeWidgetState extends State<HomeFreeWidget>
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                        ],
+                                          );
+                                        },
                                       ),
                                       Align(
                                         alignment:
@@ -400,8 +403,14 @@ class _HomeFreeWidgetState extends State<HomeFreeWidget>
                                             .SmoothPageIndicator(
                                           controller: _model
                                                   .pageViewController ??=
-                                              PageController(initialPage: 0),
-                                          count: 1,
+                                              PageController(
+                                                  initialPage: min(
+                                                      1,
+                                                      pageViewMainmovieRecordList
+                                                              .length -
+                                                          1)),
+                                          count: pageViewMainmovieRecordList
+                                              .length,
                                           axisDirection: Axis.horizontal,
                                           onDotClicked: (i) {
                                             _model.pageViewController!

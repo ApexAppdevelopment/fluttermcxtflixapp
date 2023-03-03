@@ -74,11 +74,11 @@ class _SubscriptionCardWidgetState extends State<SubscriptionCardWidget> {
             ),
           ),
           Text(
-            'Platinum',
+            'MCXT Platinum Package',
             style: FlutterFlowTheme.of(context).subtitle2,
           ),
           Text(
-            '100 MCXT',
+            '1500 USD = ',
             style: FlutterFlowTheme.of(context).bodyText1,
           ),
           ListTile(

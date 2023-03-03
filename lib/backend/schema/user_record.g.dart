@@ -95,6 +95,13 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.refferralLink;
+    if (value != null) {
+      result
+        ..add('refferralLink')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -161,6 +168,10 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'refferralLink':
+          result.refferralLink = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -198,6 +209,8 @@ class _$UserRecord extends UserRecord {
   @override
   final String? phoneNumber;
   @override
+  final String? refferralLink;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UserRecord([void Function(UserRecordBuilder)? updates]) =>
@@ -215,6 +228,7 @@ class _$UserRecord extends UserRecord {
       this.mcxtwalletaddress,
       this.walletbalance,
       this.phoneNumber,
+      this.refferralLink,
       this.ffRef})
       : super._();
 
@@ -240,6 +254,7 @@ class _$UserRecord extends UserRecord {
         mcxtwalletaddress == other.mcxtwalletaddress &&
         walletbalance == other.walletbalance &&
         phoneNumber == other.phoneNumber &&
+        refferralLink == other.refferralLink &&
         ffRef == other.ffRef;
   }
 
@@ -255,17 +270,19 @@ class _$UserRecord extends UserRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, email.hashCode),
-                                                displayName.hashCode),
-                                            photoUrl.hashCode),
-                                        uid.hashCode),
-                                    createdTime.hashCode),
-                                sponsorid.hashCode),
-                            refferralcode.hashCode),
-                        city.hashCode),
-                    mcxtwalletaddress.hashCode),
-                walletbalance.hashCode),
-            phoneNumber.hashCode),
+                                            $jc(
+                                                $jc($jc(0, email.hashCode),
+                                                    displayName.hashCode),
+                                                photoUrl.hashCode),
+                                            uid.hashCode),
+                                        createdTime.hashCode),
+                                    sponsorid.hashCode),
+                                refferralcode.hashCode),
+                            city.hashCode),
+                        mcxtwalletaddress.hashCode),
+                    walletbalance.hashCode),
+                phoneNumber.hashCode),
+            refferralLink.hashCode),
         ffRef.hashCode));
   }
 
@@ -283,6 +300,7 @@ class _$UserRecord extends UserRecord {
           ..add('mcxtwalletaddress', mcxtwalletaddress)
           ..add('walletbalance', walletbalance)
           ..add('phoneNumber', phoneNumber)
+          ..add('refferralLink', refferralLink)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -338,6 +356,11 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
+  String? _refferralLink;
+  String? get refferralLink => _$this._refferralLink;
+  set refferralLink(String? refferralLink) =>
+      _$this._refferralLink = refferralLink;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -360,6 +383,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _mcxtwalletaddress = $v.mcxtwalletaddress;
       _walletbalance = $v.walletbalance;
       _phoneNumber = $v.phoneNumber;
+      _refferralLink = $v.refferralLink;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -394,6 +418,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             mcxtwalletaddress: mcxtwalletaddress,
             walletbalance: walletbalance,
             phoneNumber: phoneNumber,
+            refferralLink: refferralLink,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

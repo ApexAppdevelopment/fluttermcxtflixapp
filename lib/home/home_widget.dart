@@ -1,13 +1,11 @@
 import '/auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -51,7 +49,19 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         ),
       ],
     ),
-    'containerOnPageLoadAnimation': AnimationInfo(
+    'containerOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         MoveEffect(
@@ -240,38 +250,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                             ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      25.0, 200.0, 0.0, 0.0),
-                                              child: AutoSizeText(
-                                                pageViewMainmovieRecord.title!
-                                                    .maybeHandleOverflow(
-                                                        maxChars: 25),
-                                                textAlign: TextAlign.start,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .title3
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .title3Family,
-                                                          color: Colors.white,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .title3Family),
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -420,6 +398,88 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 150.0,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                      child: StreamBuilder<List<MainmovieRecord>>(
+                        stream: queryMainmovieRecord(),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 40.0,
+                                height: 40.0,
+                                child: SpinKitChasingDots(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  size: 40.0,
+                                ),
+                              ),
+                            );
+                          }
+                          List<MainmovieRecord> listViewMainmovieRecordList =
+                              snapshot.data!;
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            primary: false,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: listViewMainmovieRecordList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewMainmovieRecord =
+                                  listViewMainmovieRecordList[listViewIndex];
+                              return Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      'MovDetails',
+                                      queryParams: {
+                                        'movdetails': serializeParam(
+                                          listViewMainmovieRecord,
+                                          ParamType.Document,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        'movdetails': listViewMainmovieRecord,
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 100.0,
+                                    height: 140.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: Image.network(
+                                          listViewMainmovieRecord.imagebanner!,
+                                        ).image,
+                                      ),
+                                      borderRadius: BorderRadius.circular(6.0),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ).animateOnPageLoad(
+                      animationsMap['containerOnPageLoadAnimation1']!),
+                ),
                 Container(
                   width: double.infinity,
                   height: 150.0,
@@ -429,8 +489,8 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                   child: Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                    child: StreamBuilder<List<MainmovieRecord>>(
-                      stream: queryMainmovieRecord(),
+                    child: StreamBuilder<List<GoodmoviesRecord>>(
+                      stream: queryGoodmoviesRecord(),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -446,32 +506,32 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                             ),
                           );
                         }
-                        List<MainmovieRecord> listViewMainmovieRecordList =
+                        List<GoodmoviesRecord> listViewGoodmoviesRecordList =
                             snapshot.data!;
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           primary: false,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: listViewMainmovieRecordList.length,
+                          itemCount: listViewGoodmoviesRecordList.length,
                           itemBuilder: (context, listViewIndex) {
-                            final listViewMainmovieRecord =
-                                listViewMainmovieRecordList[listViewIndex];
+                            final listViewGoodmoviesRecord =
+                                listViewGoodmoviesRecordList[listViewIndex];
                             return Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 10.0, 0.0),
                               child: InkWell(
                                 onTap: () async {
                                   context.pushNamed(
-                                    'MovDetails',
+                                    'PlayMoviegoodmovie',
                                     queryParams: {
-                                      'movdetails': serializeParam(
-                                        listViewMainmovieRecord,
+                                      'goodmovieplay': serializeParam(
+                                        listViewGoodmoviesRecord,
                                         ParamType.Document,
                                       ),
                                     }.withoutNulls,
                                     extra: <String, dynamic>{
-                                      'movdetails': listViewMainmovieRecord,
+                                      'goodmovieplay': listViewGoodmoviesRecord,
                                     },
                                   );
                                 },
@@ -484,7 +544,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: Image.network(
-                                        listViewMainmovieRecord.imagebanner!,
+                                        listViewGoodmoviesRecord.cover!,
                                       ).image,
                                     ),
                                     borderRadius: BorderRadius.circular(6.0),
@@ -498,272 +558,26 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                     ),
                   ),
                 ).animateOnPageLoad(
-                    animationsMap['containerOnPageLoadAnimation']!),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 24.0, 16.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'On TV',
-                        style: FlutterFlowTheme.of(context).subtitle2,
+                    animationsMap['containerOnPageLoadAnimation2']!),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          16.0, 24.0, 24.0, 16.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Continue Watching...',
+                            style: FlutterFlowTheme.of(context).subtitle2,
+                          ),
+                        ],
                       ),
-                      Text(
-                        'See all >',
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 224.0,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                    child: FutureBuilder<List<TmdbmovieRow>>(
-                      future: TmdbmovieTable().queryRows(
-                        queryFn: (q) => q,
-                        limit: 10,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 40.0,
-                              height: 40.0,
-                              child: SpinKitChasingDots(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                size: 40.0,
-                              ),
-                            ),
-                          );
-                        }
-                        List<TmdbmovieRow> listViewTmdbmovieRowList =
-                            snapshot.data!;
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          primary: false,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: listViewTmdbmovieRowList.length,
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewTmdbmovieRow =
-                                listViewTmdbmovieRowList[listViewIndex];
-                            return Container(
-                              width: 123.2,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2.0),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 12.0, 0.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      child: Image.network(
-                                        valueOrDefault<String>(
-                                          'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${valueOrDefault<String>(
-                                            listViewTmdbmovieRow.backdropPath,
-                                            'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/6O9lx7VazuI1OixBm7iPREDWcsQ.jpg',
-                                          )}',
-                                          'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/6O9lx7VazuI1OixBm7iPREDWcsQ.jpg',
-                                        ),
-                                        width: 116.1,
-                                        height: 186.6,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        2.0, 0.0, 0.0, 4.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        AutoSizeText(
-                                          listViewTmdbmovieRow.title!
-                                              .maybeHandleOverflow(
-                                                  maxChars: 12),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family),
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 24.0, 16.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Popular Movies',
-                        style: FlutterFlowTheme.of(context).subtitle2,
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          context.pushNamed('Allmovies');
-                        },
-                        child: Text(
-                          'See all >',
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 224.0,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                    child: FutureBuilder<List<TmdbmovieRow>>(
-                      future: TmdbmovieTable().queryRows(
-                        queryFn: (q) => q,
-                        limit: 10,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 40.0,
-                              height: 40.0,
-                              child: SpinKitChasingDots(
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                size: 40.0,
-                              ),
-                            ),
-                          );
-                        }
-                        List<TmdbmovieRow> listViewTmdbmovieRowList =
-                            snapshot.data!;
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          primary: false,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: listViewTmdbmovieRowList.length,
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewTmdbmovieRow =
-                                listViewTmdbmovieRowList[listViewIndex];
-                            return Container(
-                              width: 123.2,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2.0),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 12.0, 0.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      child: Image.network(
-                                        valueOrDefault<String>(
-                                          'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${valueOrDefault<String>(
-                                            listViewTmdbmovieRow.backdropPath,
-                                            'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/6O9lx7VazuI1OixBm7iPREDWcsQ.jpg',
-                                          )}',
-                                          'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/6O9lx7VazuI1OixBm7iPREDWcsQ.jpg',
-                                        ),
-                                        width: 116.1,
-                                        height: 186.6,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        2.0, 0.0, 0.0, 4.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        AutoSizeText(
-                                          listViewTmdbmovieRow.title!
-                                              .maybeHandleOverflow(
-                                                  maxChars: 12),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family),
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 24.0,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
+                  ],
                 ),
               ],
             ),

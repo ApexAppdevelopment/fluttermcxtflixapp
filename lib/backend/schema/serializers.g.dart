@@ -8,6 +8,7 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BookmarkRecord.serializer)
+      ..add(GoodmoviesRecord.serializer)
       ..add(MainmovieRecord.serializer)
       ..add(UserRecord.serializer)
       ..add(WatchHistoryRecord.serializer))
