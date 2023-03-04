@@ -17,9 +17,11 @@ class PlayMovieWidget extends StatefulWidget {
   const PlayMovieWidget({
     Key? key,
     this.playmainmovie,
+    this.playmovie,
   }) : super(key: key);
 
   final MainmovieRecord? playmainmovie;
+  final MainmovieRecord? playmovie;
 
   @override
   _PlayMovieWidgetState createState() => _PlayMovieWidgetState();
@@ -68,22 +70,25 @@ class _PlayMovieWidgetState extends State<PlayMovieWidget> {
         child: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              FFIcons.knameLeftArrow2,
-              color: FlutterFlowTheme.of(context).secondaryText,
-              size: 30.0,
+          leading: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+            child: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: Icon(
+                FFIcons.knameLeftArrow2,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                size: 30.0,
+              ),
+              onPressed: () async {
+                context.pop();
+              },
             ),
-            onPressed: () async {
-              context.pop();
-            },
           ),
           title: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +99,8 @@ class _PlayMovieWidgetState extends State<PlayMovieWidget> {
                   style: FlutterFlowTheme.of(context).title2.override(
                         fontFamily: FlutterFlowTheme.of(context).title2Family,
                         color: FlutterFlowTheme.of(context).secondaryText,
-                        fontSize: 18.0,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
                             FlutterFlowTheme.of(context).title2Family),
                       ),

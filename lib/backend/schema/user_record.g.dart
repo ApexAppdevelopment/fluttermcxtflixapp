@@ -102,6 +102,21 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.bookmark;
+    if (value != null) {
+      result
+        ..add('bookmark')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
+    value = object.addedtobookmark;
+    if (value != null) {
+      result
+        ..add('addedtobookmark')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -172,6 +187,16 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.refferralLink = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'bookmark':
+          result.bookmark = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
+        case 'addedtobookmark':
+          result.addedtobookmark = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -211,6 +236,10 @@ class _$UserRecord extends UserRecord {
   @override
   final String? refferralLink;
   @override
+  final DocumentReference<Object?>? bookmark;
+  @override
+  final String? addedtobookmark;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UserRecord([void Function(UserRecordBuilder)? updates]) =>
@@ -229,6 +258,8 @@ class _$UserRecord extends UserRecord {
       this.walletbalance,
       this.phoneNumber,
       this.refferralLink,
+      this.bookmark,
+      this.addedtobookmark,
       this.ffRef})
       : super._();
 
@@ -255,6 +286,8 @@ class _$UserRecord extends UserRecord {
         walletbalance == other.walletbalance &&
         phoneNumber == other.phoneNumber &&
         refferralLink == other.refferralLink &&
+        bookmark == other.bookmark &&
+        addedtobookmark == other.addedtobookmark &&
         ffRef == other.ffRef;
   }
 
@@ -271,18 +304,25 @@ class _$UserRecord extends UserRecord {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, email.hashCode),
-                                                    displayName.hashCode),
-                                                photoUrl.hashCode),
-                                            uid.hashCode),
-                                        createdTime.hashCode),
-                                    sponsorid.hashCode),
-                                refferralcode.hashCode),
-                            city.hashCode),
-                        mcxtwalletaddress.hashCode),
-                    walletbalance.hashCode),
-                phoneNumber.hashCode),
-            refferralLink.hashCode),
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(0,
+                                                                email.hashCode),
+                                                            displayName
+                                                                .hashCode),
+                                                        photoUrl.hashCode),
+                                                    uid.hashCode),
+                                                createdTime.hashCode),
+                                            sponsorid.hashCode),
+                                        refferralcode.hashCode),
+                                    city.hashCode),
+                                mcxtwalletaddress.hashCode),
+                            walletbalance.hashCode),
+                        phoneNumber.hashCode),
+                    refferralLink.hashCode),
+                bookmark.hashCode),
+            addedtobookmark.hashCode),
         ffRef.hashCode));
   }
 
@@ -301,6 +341,8 @@ class _$UserRecord extends UserRecord {
           ..add('walletbalance', walletbalance)
           ..add('phoneNumber', phoneNumber)
           ..add('refferralLink', refferralLink)
+          ..add('bookmark', bookmark)
+          ..add('addedtobookmark', addedtobookmark)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -361,6 +403,16 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   set refferralLink(String? refferralLink) =>
       _$this._refferralLink = refferralLink;
 
+  DocumentReference<Object?>? _bookmark;
+  DocumentReference<Object?>? get bookmark => _$this._bookmark;
+  set bookmark(DocumentReference<Object?>? bookmark) =>
+      _$this._bookmark = bookmark;
+
+  String? _addedtobookmark;
+  String? get addedtobookmark => _$this._addedtobookmark;
+  set addedtobookmark(String? addedtobookmark) =>
+      _$this._addedtobookmark = addedtobookmark;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -384,6 +436,8 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _walletbalance = $v.walletbalance;
       _phoneNumber = $v.phoneNumber;
       _refferralLink = $v.refferralLink;
+      _bookmark = $v.bookmark;
+      _addedtobookmark = $v.addedtobookmark;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -419,6 +473,8 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             walletbalance: walletbalance,
             phoneNumber: phoneNumber,
             refferralLink: refferralLink,
+            bookmark: bookmark,
+            addedtobookmark: addedtobookmark,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

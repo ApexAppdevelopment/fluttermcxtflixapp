@@ -37,6 +37,12 @@ class FFAppState extends ChangeNotifier {
     _refCode = _value;
     prefs.setInt('ff_refCode', _value);
   }
+
+  String _titledetails = '';
+  String get titledetails => _titledetails;
+  set titledetails(String _value) {
+    _titledetails = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

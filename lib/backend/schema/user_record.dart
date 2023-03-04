@@ -37,6 +37,10 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
 
   String? get refferralLink;
 
+  DocumentReference? get bookmark;
+
+  String? get addedtobookmark;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -52,7 +56,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..mcxtwalletaddress = ''
     ..walletbalance = 0
     ..phoneNumber = ''
-    ..refferralLink = '';
+    ..refferralLink = ''
+    ..addedtobookmark = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('user');
@@ -87,6 +92,8 @@ Map<String, dynamic> createUserRecordData({
   int? walletbalance,
   String? phoneNumber,
   String? refferralLink,
+  DocumentReference? bookmark,
+  String? addedtobookmark,
 }) {
   final firestoreData = serializers.toFirestore(
     UserRecord.serializer,
@@ -103,7 +110,9 @@ Map<String, dynamic> createUserRecordData({
         ..mcxtwalletaddress = mcxtwalletaddress
         ..walletbalance = walletbalance
         ..phoneNumber = phoneNumber
-        ..refferralLink = refferralLink,
+        ..refferralLink = refferralLink
+        ..bookmark = bookmark
+        ..addedtobookmark = addedtobookmark,
     ),
   );
 

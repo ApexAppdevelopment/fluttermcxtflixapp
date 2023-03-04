@@ -72,7 +72,7 @@ class _LoginBottomSheetWidgetState extends State<LoginBottomSheetWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(24.0, 8.0, 24.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(

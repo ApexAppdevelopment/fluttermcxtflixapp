@@ -140,12 +140,12 @@ class PopularMoviesCall {
 
 class MovieDetailsCall {
   static Future<ApiCallResponse> call({
-    int? movieId = 718789,
+    String? title = 'Panibugho',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'MovieDetails',
       apiUrl:
-          'https://api.themoviedb.org/3/movie/${movieId}?api_key=de74b24cb492e56c4c161adfd586421e&language=en-US',
+          'https://api.themoviedb.org/3/movie/${title}?api_key=de74b24cb492e56c4c161adfd586421e&language=en-US',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

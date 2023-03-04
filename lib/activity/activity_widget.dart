@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/components/activity_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -66,62 +67,45 @@ class _ActivityWidgetState extends State<ActivityWidget> {
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.activityCardModel1,
-                    updateCallback: () => setState(() {}),
-                    child: ActivityCardWidget(
-                      image:
-                          'https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/27Mj3rFYP3xqFy7lnz17vEd8Ms.jpg',
-                      title: 'The Gray Man',
-                      subtitle: 'relased in 07/13/2022 ',
+            child: StreamBuilder<List<WatchHistoryRecord>>(
+              stream: queryWatchHistoryRecord(),
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: SizedBox(
+                      width: 40.0,
+                      height: 40.0,
+                      child: SpinKitChasingDots(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 40.0,
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.activityCardModel2,
-                    updateCallback: () => setState(() {}),
-                    child: ActivityCardWidget(
-                      image:
-                          'https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/AnfXhKJwb9rBa8cvPBV54XgJxMF.jpg',
-                      title: 'Pantanal',
-                      subtitle: 'E02 of S05 released.',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.activityCardModel3,
-                    updateCallback: () => setState(() {}),
-                    child: ActivityCardWidget(
-                      image:
-                          'https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/AfvIjhDu9p64jKcmohS4hsPG95Q.jpg',
-                      title: 'The Black Phone ',
-                      subtitle: 'relased in 07/13/2022 ',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: wrapWithModel(
-                    model: _model.activityCardModel4,
-                    updateCallback: () => setState(() {}),
-                    child: ActivityCardWidget(
-                      image:
-                          'https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/sIRK4NYe1OK2hOJAg4xxuxzceKk.jpg',
-                      title: '2 Good 2 Be True',
-                      subtitle: 'E22 of S01 released.',
-                    ),
-                  ),
-                ),
-              ],
+                  );
+                }
+                List<WatchHistoryRecord> columnWatchHistoryRecordList =
+                    snapshot.data!;
+                return Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: List.generate(columnWatchHistoryRecordList.length,
+                      (columnIndex) {
+                    final columnWatchHistoryRecord =
+                        columnWatchHistoryRecordList[columnIndex];
+                    return Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      child: ActivityCardWidget(
+                        key: Key(
+                            'Keyjwn_${columnIndex}_of_${columnWatchHistoryRecordList.length}'),
+                        image:
+                            'https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/27Mj3rFYP3xqFy7lnz17vEd8Ms.jpg',
+                        title: 'The Gray Man',
+                        subtitle: 'relased in 07/13/2022 ',
+                      ),
+                    );
+                  }),
+                );
+              },
             ),
           ),
         ),

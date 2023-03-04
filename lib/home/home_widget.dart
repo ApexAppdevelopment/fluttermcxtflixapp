@@ -442,6 +442,11 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                     0.0, 0.0, 10.0, 0.0),
                                 child: InkWell(
                                   onTap: () async {
+                                    setState(() {
+                                      FFAppState().titledetails =
+                                          listViewMainmovieRecord.title!;
+                                    });
+
                                     context.pushNamed(
                                       'MovDetails',
                                       queryParams: {
@@ -463,9 +468,9 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                           .secondaryBackground,
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: Image.network(
+                                        image: CachedNetworkImageProvider(
                                           listViewMainmovieRecord.imagebanner!,
-                                        ).image,
+                                        ),
                                       ),
                                       borderRadius: BorderRadius.circular(6.0),
                                     ),
@@ -543,9 +548,12 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                         .secondaryBackground,
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: Image.network(
-                                        listViewGoodmoviesRecord.cover!,
-                                      ).image,
+                                      image: CachedNetworkImageProvider(
+                                        valueOrDefault<String>(
+                                          listViewGoodmoviesRecord.cover,
+                                          'https://www.themoviedb.org/t/p/w220_and_h330_face/weIJziwvVckj739XVmqwQRRyg4k.jpg',
+                                        ),
+                                      ),
                                     ),
                                     borderRadius: BorderRadius.circular(6.0),
                                   ),

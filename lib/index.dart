@@ -32,3 +32,6 @@ export '/mov_details/mov_details_widget.dart' show MovDetailsWidget;
 export '/affiliate_login/affiliate_login_widget.dart' show AffiliateLoginWidget;
 export '/play_moviegoodmovie/play_moviegoodmovie_widget.dart'
     show PlayMoviegoodmovieWidget;
+export '/webviemovie/webviemovie_widget.dart' show WebviemovieWidget;
+export '/metamask_polygon/metamask_polygon_widget.dart'
+    show MetamaskPolygonWidget;

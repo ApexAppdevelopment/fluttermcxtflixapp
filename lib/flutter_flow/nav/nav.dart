@@ -181,10 +181,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               asyncParams: {
                 'playmainmovie':
                     getDoc(['mainmovie'], MainmovieRecord.serializer),
+                'playmovie': getDoc(['mainmovie'], MainmovieRecord.serializer),
               },
               builder: (context, params) => PlayMovieWidget(
                 playmainmovie:
                     params.getParam('playmainmovie', ParamType.Document),
+                playmovie: params.getParam('playmovie', ParamType.Document),
               ),
             ),
             FFRoute(
@@ -292,6 +294,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 goodmovieplay:
                     params.getParam('goodmovieplay', ParamType.Document),
               ),
+            ),
+            FFRoute(
+              name: 'webviemovie',
+              path: 'webviemovie',
+              builder: (context, params) => WebviemovieWidget(),
+            ),
+            FFRoute(
+              name: 'MetamaskPolygon',
+              path: 'metamaskPolygon',
+              builder: (context, params) => MetamaskPolygonWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
